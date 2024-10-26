@@ -1,8 +1,10 @@
-import React from 'react'
+import Gemini from "@/components/Doubts"
 
 function page() {
   return (
-    <div>Ask doubts</div>
+    <div>
+        <Gemini/>
+    </div>
   )
 }
 
