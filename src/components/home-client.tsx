@@ -35,11 +35,11 @@ export default function HomeClient() {
   }, [blink]);
   return (
       <div>
-        <div className="text-4xl font-semibold mt-10">
+        <div className="text-4xl font-semibold mt-4">
           <span className="inline-block text-transparent text-4xl bg-clip-text font-black bg-gradient-to-l from-purple-600 to-pink-500">
             {`${words[index].substring(0, subIndex)}`}
           </span><br />
-          <h1 className="text-md mt-2">where gaming meets education.</h1>
+          <h1 className="text-3xl mt-2">where interaction meets education.</h1>
         </div>
       </div>
   );
