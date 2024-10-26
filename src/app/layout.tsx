@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 const inter = Inter({ subsets: ["latin"] });
 import { Toaster } from "react-hot-toast";
+import GoogleTranslate from "@/components/Translator";
 
 export const metadata: Metadata = {
   title: "Fun Learn",
@@ -29,7 +30,10 @@ export default async function RootLayout({
       <html lang="en" className="bg-background text-foreground">
         <body className={inter.className}>
           <Toaster />
-          <Provider>{children}</Provider>
+          <GoogleTranslate />
+          <Provider>
+            {children}
+          </Provider>
         </body>
       </html>
     </SessionProvider>
