@@ -15,6 +15,8 @@ model User {
   image           String?
   avatar          String?
   password        String?
+  voiceid         String?
+  imgurl          String?
   role            Role       @default(USER)
   lastLogin       DateTime[]
   emailVerified   DateTime?
@@ -63,19 +65,23 @@ model Module {
 }
 
 model Submodule {
-  id        String   @id @default(uuid())
-  level     Int
-  questions Json
-  quizId    String
-  moduleId  String
-  isUnlocked Boolean @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  module    Module   @relation(fields: [moduleId], references: [id])
-  quiz      Quiz     @relation(fields: [quizId], references: [id])
-  score     score[]
+  id         String   @id @default(uuid())
+  type       Type
+  questions  Json
+  quizId     String
+  moduleId   String
+  level      Int      @default(5)
+  isUnlocked Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  module     Module   @relation(fields: [moduleId], references: [id])
+  quiz       Quiz     @relation(fields: [quizId], references: [id])
+  score      score[]
+}
 
-  @@unique([quizId, level])
+enum Type {
+  LECTURE
+  ASSIGNMENT
 }
 
 model score {

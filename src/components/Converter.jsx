@@ -9,6 +9,7 @@ import { RiAiGenerate } from "react-icons/ri"
 import { PiCursorClickFill } from "react-icons/pi"
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Card, CardContent} from "@/components/ui/card"
+import Markdown from "react-markdown"
 
 const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY
 const ELEVENLABS_API_KEY = process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY
@@ -49,12 +50,12 @@ export default function GeminiTTS() {
       const genAI = new GoogleGenerativeAI(GEMINI_API_KEY)
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
 
-      const result = await model.generateContent(prompt)
+      const result = await model.generateContent(`You are an excellent teacher teaching for in a school. Know explain  the topic ${prompt}`)
       const response = await result.response
       const text = response.text()
       setDisplayContent(text)
 
-      const simpleResult = await model.generateContent(`Simplify the following text for school children in just 100 words: ${text}`)
+      const simpleResult = await model.generateContent(`Explain the topic in detail in simple words for school students: ${text}`)
       const simpleResponse = await simpleResult.response
       const simpleText = simpleResponse.text()
       setSimpleContent(simpleText)
@@ -139,7 +140,9 @@ export default function GeminiTTS() {
                 <div>
                   <h2 className="text-lg font-semibold my-3">{prompt}</h2>
                   <ScrollArea className="h-[calc(100vh-300px)] border rounded-md p-4">
-                    <div className="pr-4">{displayContent}</div>
+                    <div className="pr-4">
+                      <Markdown>{displayContent}</Markdown>
+                    </div>
                   </ScrollArea>
                 </div>
               )}
@@ -175,6 +178,7 @@ export default function GeminiTTS() {
                       Stop
                     </Button>
                   </div>
+                  {/* <pre>{JSON.stringify(voices)}</pre> */}
                 </div>
               )}
             </div>

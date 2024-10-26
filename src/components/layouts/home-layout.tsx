@@ -40,6 +40,11 @@ export default function HomeLayout({
       icon: <MdOutlineLeaderboard />,
       path: "/ask-doubt",
     },
+    {
+      name: "Character",
+      icon: <GiClothes />,
+      path: "/character",
+    }
     // {
     //   name: "Shop",
     //   icon: <FaShop />,

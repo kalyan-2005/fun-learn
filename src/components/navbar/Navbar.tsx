@@ -32,48 +32,9 @@ const Navbar: React.FC<Props> = ({ currentUser, menu, setMenu }: Props) => {
   
 
   return (
-    // <div className="shadow-md px-4 z-50 sticky top-0 backdrop-blur-3xl">
-    //   <div className="flex items-center justify-end px-16 py-3">
-    //     <div className="flex gap-2 items-center">
-    //       {currentUser?.role == "ADMIN" && (
-    //         <h1 className="text-sm font-medium">ADMIN</h1>
-    //       )}
-    //       <div
-    //         className="flex items-center gap-3 rounded-lg cursor-pointer p-2 px-3 dark:hover:bg-secondary-800 hover:bg-secondary-300"
-    //         onClick={() => router.push("/shop")}
-    //       >
-    //         <Image src="/diamond.png" width={20} height={20} alt="diamond" />
-    //         <h1>{diamonds}</h1>
-    //       </div>
-    //       <div
-    //         className="flex items-center gap-3 rounded-lg cursor-pointer p-2 px-3 dark:hover:bg-secondary-800 hover:bg-secondary-300"
-    //         onClick={() => router.push("/shop")}
-    //       >
-    //         <Image src="/heart.png" width={20} height={20} alt="heart" />
-    //         <h1>{hearts}</h1>
-    //       </div>
-    //       <div
-    //         className="flex items-center gap-3 rounded-lg cursor-pointer p-2 px-3 dark:hover:bg-secondary-800 hover:bg-secondary-300"
-    //         onClick={() => router.push("/shop")}
-    //       >
-    //         <Image src="/Supercoin.png" width={20} height={20} alt="heart" />
-    //         <h1>{superCoins}</h1>
-    //       </div>
-    //       <ThemeSwitch />
-    //       <div>
-    //         <Image
-    //           src={avatar || "/avatar.png"}
-    //           width={40}
-    //           height={40}
-    //           alt="avatar"
-    //           className="rounded-full cursor-pointer"
-    //           onClick={() => router.push("/avatar")}
-    //         />
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-    <div></div>
+    <div className="flex py-5 items-center justify-end px-8">
+      <h1>Avatar</h1>
+    </div>
   );
 };
 
