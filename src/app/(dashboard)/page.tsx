@@ -36,53 +36,14 @@ const page = async () => {
           />
           <IoGameController className="-rotate-12 text-[150px] mt-12 text-violet-500/60" />
           <Image
-            src="https://lordicon.com/icons/wired/gradient/1416-triangle.svg"
-            alt=""
-            height="200"
-            width="100"
-            className="absolute right-10 top-52 rotate-12"
-          />
-          <Image
             src="https://cdn0.iconfinder.com/data/icons/thin-line-color-2/21/22_1-512.png"
             alt=""
             height="200"
             width="100"
-            className="absolute right-[340px] top-52 rotate-45"
+            className="absolute right-[200px] top-52 rotate-45"
           />
         </div>
       </div>
-      <div className="flex mb-10 p-2 text-center gap-16 justify-center flex-wrap">
-          <div className="w-[500px] rounded-md shadow-xl p-2 bg-secondary-50 text-secondary-900">
-            <Image
-              src="https://png.pngtree.com/png-clipart/20210312/original/pngtree-game-score-wood-sign-style-png-image_6072790.png"
-              alt=""
-              height={100}
-              width={110}
-              className="m-auto py-11"
-            />
-            <p className="text-primary-600 font-black pt-2 text-3xl">
-            {totalScore}
-            </p>
-            <h1 className="p-1 text-sm font-bold">
-              Total Score
-            </h1>
-          </div>
-          <div className="w-[500px] rounded-md shadow-xl bg-secondary-50 text-secondary-900 p-2">
-            <Image
-              src="/home-quizzes.gif"
-              alt=""
-              height={200}
-              width={200}
-              className="m-auto"
-            />
-            <p className="text-primary-600 font-black pt-2 text-3xl">
-              {totalQuizzes}
-            </p>
-            <h1 className="p-1 text-sm font-bold">
-              Total Quizzes
-            </h1>
-          </div>
-        </div>
       </div>
   );
 };
