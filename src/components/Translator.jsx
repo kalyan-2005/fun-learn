@@ -42,7 +42,7 @@ export default function GoogleTranslate() {
   return (
     <div
       id="google_translate_element"
-      style={{ position: "absolute", top: "10px", right: "10px",display:"none"}}
+      style={{ position: "absolute", top: "10px", right: "10px"}}
       className="z-50"
     ></div>
   );
