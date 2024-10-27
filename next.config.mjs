@@ -47,6 +47,10 @@ const nextConfig = {
         hostname: "mkbso1vsjf6fwnka.public.blob.vercel-storage.com",
         port: "",
       },
+      {
+        protocol:"https",
+        hostname:"cdn-icons-png.freepik.com"
+      }
     ],
   },
   typescript: {
