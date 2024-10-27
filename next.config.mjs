@@ -44,6 +44,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "ibb.co",
+      },
+      {
+        protocol: "https",
         hostname: "mkbso1vsjf6fwnka.public.blob.vercel-storage.com",
         port: "",
       },

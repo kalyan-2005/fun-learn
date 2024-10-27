@@ -22,14 +22,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function Gemini() {
+export default function Gemini({ currentUser }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [voices, setVoices] = useState([]);
-  const [selectedVoice, setSelectedVoice] = useState("");
+  const [selectedVoice, setSelectedVoice] = useState(currentUser?.voiceid || "Xb7hH8MSUJpSbSDYk0k2");
   const [error, setError] = useState("");
   const fileInputRef = useRef(null);
   const scrollAreaRef = useRef(null);
@@ -194,8 +194,8 @@ export default function Gemini() {
   }, [messages]);
 
   return (
-    <div className="flex items-center gap-10 p-10">
-      <Card className="w-full max-w-lg mx-auto h-[80vh] flex flex-col border-none">
+    <div className="flex items-center p-10">
+      <Card className="w-[700px] mx-auto h-[80vh] flex flex-col border-none">
         <CardHeader className="px-6 py-4 bg-blue-500 text-white rounded-t">
           <CardTitle className="text-lg font-semibold ">EduBot Chat</CardTitle>
         </CardHeader>
@@ -295,14 +295,14 @@ export default function Gemini() {
           </div>
         </CardFooter>
       </Card>
-      <div className="flex flex-col items-center space-y-4 w-full ">
-        <Image
+      <div className="flex flex-col items-center justify-end gap-28 h-full w-1/3 ">
+        <img
           width={220}
           height={220}
-          src="https://i.pinimg.com/originals/17/b4/d7/17b4d75844d047a1ae585bda3c27b6ec.gif"
+          src={currentUser.imgurl||"https://avatars.dicebear.com/api/identicon/123.svg"}
           alt="AI Assistant"
         />
-        <Select onValueChange={setSelectedVoice} value={selectedVoice}>
+        {/* <Select onValueChange={setSelectedVoice} value={selectedVoice}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select a voice" />
           </SelectTrigger>
@@ -313,7 +313,7 @@ export default function Gemini() {
               </SelectItem>
             ))}
           </SelectContent>
-        </Select>
+        </Select> */}
         <div className="flex space-x-2 w-full">
           <Button
             onClick={speak}

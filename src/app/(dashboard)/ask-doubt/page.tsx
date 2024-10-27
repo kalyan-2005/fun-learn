@@ -1,9 +1,11 @@
+import getCurrentUser from "@/actions/getCurrentUser";
 import Gemini from "@/components/Doubts"
 
-function page() {
+async function page() {
+  const currentUser = await getCurrentUser();
   return (
     <div>
-        <Gemini/>
+        <Gemini currentUser={currentUser}/>
     </div>
   )
 }
