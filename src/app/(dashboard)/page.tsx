@@ -3,13 +3,13 @@ import HomeClient from "@/components/home-client";
 import Image from "next/image";
 import React from "react";
 import { IoGameController } from "react-icons/io5";
+import { FaFolderOpen } from "react-icons/fa";
 
 const page = async () => {
   const currentUser = await getCurrentUser();
 
   return (
     <div>
-      {/* Header Section */}
       <div className="h-60 bg-gradient-to-r from-blue-500 to-purple-400 m-2 rounded-lg flex justify-between items-center">
         <div className="p-10">
           <h1 className="text-secondary-50 font-bold text-xl">
@@ -34,7 +34,7 @@ const page = async () => {
           />
           <IoGameController className="-rotate-12 text-[150px] mb-20 text-violet-500/60" />
           <Image
-            src="https://cdn-icons-png.flaticon.com/512/742/742751.png"
+            src="https://cdn0.iconfinder.com/data/icons/thin-line-color-2/21/22_1-512.png"
             alt=""
             height="200"
             width="100"
@@ -43,7 +43,6 @@ const page = async () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 p-4">
-        {/* Feature 1: Gen AI Teacher */}
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
           <Image
             src="https://cdn-icons-png.flaticon.com/512/4250/4250512.png"
@@ -57,8 +56,6 @@ const page = async () => {
             A virtual AI teacher providing personalized lessons and learning insights.
           </p>
         </div>
-
-        {/* Feature 2: Gen AI Doubt Solving Assistant */}
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
           <Image
             src="https://cdn-icons-png.flaticon.com/512/1973/1973747.png"
@@ -75,12 +72,7 @@ const page = async () => {
 
         {/* Feature 3: Quiz Generator */}
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
-          <Image
-            src="https://cdn-icons-png.flaticon.com/512/3698/3698153.png"
-            alt="Quiz Generator"
-            width="100"
-            height="100"
-            className="mx-auto mb-4"
+          <FaFolderOpen className="h-24 w-24 mx-auto mb-4 text-blue-500"
           />
           <h2 className="text-lg font-bold text-blue-500">Quiz Generator</h2>
           <p className="text-sm mt-2 text-gray-600">

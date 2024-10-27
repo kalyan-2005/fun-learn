@@ -24,7 +24,7 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <SessionProvider
-      refetchInterval={5 * 60} // 5 minutes
+      refetchInterval={5 * 60}
       session={session}
     >
       <html lang="en" className="bg-background text-foreground">

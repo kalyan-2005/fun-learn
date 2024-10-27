@@ -1,15 +1,15 @@
 'use client'
-
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Play, Square, Sparkles, Loader2 } from "lucide-react"
+import { Play, Square, Loader2, Sparkles } from "lucide-react"
+import { RiAiGenerate } from "react-icons/ri"
+import { PiCursorClickFill } from "react-icons/pi"
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Card, CardContent } from "@/components/ui/card"
-import Markdown from "react-markdown"
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from "framer-motion"
 
 const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY
 const ELEVENLABS_API_KEY = process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY
@@ -21,22 +21,8 @@ export default function GeminiTTS({ currentUser }) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [voices, setVoices] = useState([])
-  const [selectedVoice, setSelectedVoice] = useState('')
+  const [selectedVoice, setSelectedVoice] = useState(currentUser?.voice_id || 'Xb7hH8MSUJpSbSDYk0k2')
   const audioRef = useRef(null)
-
-  // const fetchVoices = async () => {
-  //   try {
-  //     const response = await fetch('https://api.elevenlabs.io/v1/voices', {
-  //       headers: { 'xi-api-key': ELEVENLABS_API_KEY },
-  //     })
-  //     if (!response.ok) throw new Error('Failed to fetch voices')
-  //     const data = await response.json()
-  //     setVoices(data.voices)
-  //     setSelectedVoice(data.voices[0]?.voice_id || '')
-  //   } catch (err) {
-  //     setError('Failed to load voices. Please check your API key.')
-  //   }
-  // }
 
   const generateContent = async () => {
     setIsLoading(true)
@@ -46,12 +32,12 @@ export default function GeminiTTS({ currentUser }) {
       const genAI = new GoogleGenerativeAI(GEMINI_API_KEY)
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
 
-      const result = await model.generateContent(`You are an excellent teacher teaching for in a school. Know explain  the topic ${prompt}`)
+      const result = await model.generateContent(prompt)
       const response = await result.response
       const text = response.text()
       setDisplayContent(text)
 
-      const simpleResult = await model.generateContent(`Explain the topic in detail in simple words for school students: ${text}`)
+      const simpleResult = await model.generateContent(`Simplify the following text for school children in just 100 words: ${text}`)
       const simpleResponse = await simpleResult.response
       const simpleText = simpleResponse.text()
       setSimpleContent(simpleText)
@@ -67,9 +53,8 @@ export default function GeminiTTS({ currentUser }) {
     if (!selectedVoice || !simpleContent) return
     setIsLoading(true)
     setError('')
-
     try {
-      const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${currentUser.voiceid}`, {
+      const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${selectedVoice}`, {
         method: 'POST',
         headers: {
           'xi-api-key': ELEVENLABS_API_KEY,
@@ -84,12 +69,9 @@ export default function GeminiTTS({ currentUser }) {
           },
         }),
       })
-
       if (!response.ok) throw new Error('Text-to-speech conversion failed')
-
       const audioBlob = await response.blob()
       const audioUrl = URL.createObjectURL(audioBlob)
-
       if (audioRef.current) {
         audioRef.current.src = audioUrl
         audioRef.current.play()
@@ -139,23 +121,9 @@ export default function GeminiTTS({ currentUser }) {
                     disabled={isLoading || !prompt}
                     className="absolute right-0 top-1/2 transform -translate-y-1/2 rounded-full w-10 h-10 bg-purple-500 hover:bg-purple-600 focus:ring-2 focus:ring-purple-400 focus:ring-opacity-50 transition-colors duration-200"
                   >
-                    <Sparkles className="h-5 w-5 text-white" />
+                    {isLoading ? <Loader2 className="h-5 w-5 animate-spin text-white" /> : <Sparkles className="h-5 w-5 text-white" />}
                   </Button>
                 </div>
-              </motion.div>
-            ) : isLoading ? (
-              <motion.div
-                key="loading"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5 }}
-                className="flex flex-col items-center justify-center space-y-4"
-              >
-                <Loader2 className="h-16 w-16 text-purple-500 animate-spin" />
-                <p className="text-lg font-medium text-gray-600 dark:text-gray-300">
-                  Generating amazing content for you...
-                </p>
               </motion.div>
             ) : (
               <motion.div
@@ -166,33 +134,21 @@ export default function GeminiTTS({ currentUser }) {
                 className="grid grid-cols-1 md:grid-cols-2 gap-8"
               >
                 <div className="space-y-4">
-                  <h2 className="text-2xl font-bold text-purple-600 dark:text-purple-400">{prompt}</h2>
+                  <h2 className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                    {prompt}
+                  </h2>
                   <ScrollArea className="h-[calc(100vh-300px)] border rounded-lg p-4 bg-white dark:bg-gray-700 shadow-inner">
-                    <div className="pr-4">
-                      <Markdown className="prose dark:prose-invert max-w-none">{displayContent}</Markdown>
-                    </div>
+                    <div className="pr-4">{displayContent}</div>
                   </ScrollArea>
                 </div>
                 <div className="space-y-6 flex flex-col items-center">
                   <Image
                     width={200}
                     height={200}
-                    src="https://i.pinimg.com/originals/17/b4/d7/17b4d75844d047a1ae585bda3c27b6ec.gif"
+                    src={currentUser?.imgurl || "https://i.pinimg.com/originals/17/b4/d7/17b4d75844d047a1ae585bda3c27b6ec.gif"}
                     alt="AI Assistant"
-                    className="rounded-full shadow-lg"
+                    className="shadow-lg rounded-full"
                   />
-                  {/* <Select onValueChange={setSelectedVoice} value={selectedVoice}>
-                    <SelectTrigger className="w-full max-w-xs">
-                      <SelectValue placeholder="Select a voice" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {voices.map((voice) => (
-                        <SelectItem key={voice.voice_id} value={voice.voice_id}>
-                          {voice.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select> */}
                   <div className="flex space-x-4 w-full max-w-xs">
                     <Button
                       onClick={speak}
