@@ -60,7 +60,7 @@ export default function HomeLayout({
     <div className="w-full flex">
       <Sidebar items={items} menu={menu} setMenu={setMenu} currentUser={currentUser} />
       <div className={`w-full`}>
-        <Navbar currentUser={currentUser} menu={menu} setMenu={setMenu} />
+        {/* <Navbar currentUser={currentUser} menu={menu} setMenu={setMenu} /> */}
         <Suspense fallback={<Loading />}>{children}</Suspense>
       </div>
     </div>

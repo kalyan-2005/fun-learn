@@ -28,13 +28,14 @@ export default function Sidebar({ items, menu, setMenu, currentUser }: Props) {
     <div
       className={`bg-background sticky top-0 h-dvh px-2 shadow-sm shadow-blue-800/40`}
     >
-      <div className="font-bold px-4 py-4 text-2xl text-slate-300">
+      {/* <div className="font-bold px-4 py-4 text-2xl text-slate-300">
         <Link href="/" className="hover:text-blue-800 transition-colors">
           Fun Learn
         </Link>
-      </div>
+      </div> */}
       <div className="h-full flex flex-col justify-between">
         <div className="">
+          <h1 className="text-xl font-black uppercase ps-3 pt-4">Fun Learn</h1>
           {items.map((item) => {
             return (
               <div key={item.path}>

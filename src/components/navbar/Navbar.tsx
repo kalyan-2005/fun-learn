@@ -33,7 +33,6 @@ const Navbar: React.FC<Props> = ({ currentUser, menu, setMenu }: Props) => {
 
   return (
     <div className="flex py-5 items-center justify-end px-8">
-      <h1>Avatar</h1>
     </div>
   );
 };
