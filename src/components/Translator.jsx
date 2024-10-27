@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 export default function GoogleTranslate() {
@@ -39,10 +40,13 @@ export default function GoogleTranslate() {
     };
   }, []);
 
+  const pathname = usePathname()
+  if(pathname !== "/") return null
+
   return (
     <div
       id="google_translate_element"
-      style={{ position: "absolute", top: "10px", right: "10px"}}
+      style={{ position: "absolute", bottom: "10px", right: "10px"}}
       className="z-50"
     ></div>
   );
