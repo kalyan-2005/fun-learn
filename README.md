@@ -30,3 +30,4 @@ To set up the project locally, follow these steps:
    ```
 
 > The application should now be running on `http://localhost:3000`.
+# FunLearn-SC
