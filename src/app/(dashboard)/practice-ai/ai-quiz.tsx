@@ -34,8 +34,10 @@ const AiQuiz = ({ currentUser }: { currentUser: any }) => {
   };
 
   const handleGenerate = async () => {
-    if (currentUser?.supercoins > 0 && hearts >= nQuestions) {
+    console.log("hii i am in handle Generate function#########################################################3")
+    // if (currentUser?.supercoins > 0 && hearts >= nQuestions) {
       try {
+        console.log("iam in second place #########################################################3")
         setLoading(true);
         setText("Generating...");
 
@@ -45,13 +47,22 @@ const AiQuiz = ({ currentUser }: { currentUser: any }) => {
           difficulty,
         });
 
-        await handleSuperCoins(currentUser.id);
-        setSuperCoins(superCoins - 1);
-        const res = await response.data;
-        const validate = res.payload
-          .replace(/^```jsonn?/, "")
-          .replace(/```$/, "");
-        const msg = JSON.parse(validate);
+        // await handleSuperCoins(currentUser.id);
+        // setSuperCoins(superCoins - 1);
+        // const res = await response.data;
+        // const validate = res.payload
+        //   .replace(/^```jsonn?/, "")
+        //   .replace(/```$/, "");
+        // const msg = JSON.parse(validate);
+
+        const res = response.data; // No need for `await` if `response` is already resolved
+let payload = res.payload.trim();
+
+// Remove code block markers
+payload = payload.replace(/^```json\s*|\s*```$/g, '');
+
+// Parse JSON
+const msg = JSON.parse(payload);
         setResponse(msg);
         setLoading(false);
         setText("Generate");
@@ -63,11 +74,11 @@ const AiQuiz = ({ currentUser }: { currentUser: any }) => {
         setText("Generate");
         toast.error("Error generating questions");
       }
-    } else {
-      if (superCoins <= 0)
-        toast.error("You don&apos;t have enough supercoins 🪙!");
-      if (hearts < nQuestions) toast.error("You don't have enough hearts ❤️!");
-    }
+    // } else {
+    //   if (superCoins <= 0)
+    //     toast.error("You don&apos;t have enough supercoins 🪙!");
+    //   if (hearts < nQuestions) toast.error("You don't have enough hearts ❤️!");
+    // }
   };
 
   return (
@@ -199,6 +210,35 @@ const AiQuiz = ({ currentUser }: { currentUser: any }) => {
 };
 
 export default AiQuiz;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // "use client";
 
